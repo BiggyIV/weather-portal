@@ -76,9 +76,18 @@
             <div class="column data-source">
                 <h2>Карта тривог України</h2>
                 <div class="alarm-widget">
-                    <!-- Віджет Ukrainian Alarm Map -->
-                    <iframe src="https://map.ukrainealarm.com/embed" width="100%" height="100%" frameborder="0" scrolling="no" allow="geolocation"></iframe>
+                    <!-- Альтернативний спосіб вбудовування віджета Ukrainian Alarm Map -->
+                    <iframe 
+                        src="https://alerts.com.ua/uk/widgets/map?fullscreen=0&width=100%&height=100%&background=1" 
+                        width="100%" 
+                        height="100%" 
+                        frameborder="0" 
+                        scrolling="no" 
+                        style="border:none; overflow:hidden; width:100%; height:100%;" 
+                        allowtransparency="true">
+                    </iframe>
                 </div>
+                <p><small>Або перегляньте <a href="https://map.ukrainealarm.com/" target="_blank">повноекранну карту тривог</a></small></p>
             </div>
         </div>
         
@@ -96,9 +105,3 @@
                 const loadingMessage = this.parentElement.querySelector('.loading');
                 if (loadingMessage) {
                     loadingMessage.style.display = 'none';
-                }
-            };
-        });
-    </script>
-</body>
-</html>
