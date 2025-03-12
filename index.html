@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Погодний Інформаційний Портал</title>
+    <title>Погодний та Безпековий Інформаційний Портал</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -31,6 +31,7 @@
             overflow: hidden;
             border: 1px solid #ddd;
             border-radius: 4px;
+            margin-bottom: 20px;
         }
         iframe {
             width: 100%;
@@ -43,47 +44,61 @@
             font-style: italic;
             color: #666;
         }
+        .alarm-widget {
+            width: 100%;
+            height: 500px;
+            margin-bottom: 20px;
+        }
+        .two-columns {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .column {
+            flex: 1;
+            min-width: 300px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Погодний Інформаційний Портал</h1>
+        <h1>Погодний та Безпековий Інформаційний Портал</h1>
         
-        <div class="data-source">
-            <h2>Дані WindGuru (Станція 79011)</h2>
-            <div class="iframe-container">
-                <iframe src="https://wap2.windguru.cz/view.php?&sc=79011&m=3&n=&from=search&start=0&full=1" title="WindGuru Forecast"></iframe>
-                <div class="loading">Завантаження даних WindGuru...</div>
+        <div class="two-columns">
+            <div class="column data-source">
+                <h2>Дані WindGuru (Станція 79011)</h2>
+                <div class="iframe-container">
+                    <iframe src="https://wap2.windguru.cz/view.php?&sc=79011&m=3&n=&from=search&start=0&full=1" title="WindGuru Forecast"></iframe>
+                    <div class="loading">Завантаження даних WindGuru...</div>
+                </div>
+            </div>
+            
+            <div class="column data-source">
+                <h2>Карта тривог України</h2>
+                <div class="alarm-widget">
+                    <!-- Віджет Ukrainian Alarm Map -->
+                    <iframe src="https://map.ukrainealarm.com/embed" width="100%" height="100%" frameborder="0" scrolling="no" allow="geolocation"></iframe>
+                </div>
             </div>
         </div>
         
-        <!-- Тут можна додати інші джерела даних -->
+        <!-- Місце для додаткових інформаційних блоків -->
         <div class="data-source">
-            <h2>Інше джерело даних</h2>
-            <p>Тут буде відображатися інформація з іншого джерела.</p>
-            <!-- Додайте код для відображення даних з інших джерел -->
+            <h2>Додаткова інформація</h2>
+            <p>Тут можна додати будь-які інші джерела даних або інформаційні блоки.</p>
         </div>
     </div>
 
     <script>
-        // Код для приховування повідомлення про завантаження після завантаження iframe
-        document.querySelector('iframe').onload = function() {
-            document.querySelector('.loading').style.display = 'none';
-        };
-        
-        // Тут можна додати код для отримання даних з інших API або джерел
-        // Наприклад, використовуючи fetch для отримання даних з API:
-        /*
-        fetch('url_до_api')
-            .then(response => response.json())
-            .then(data => {
-                // Обробка та відображення даних
-                console.log(data);
-            })
-            .catch(error => {
-                console.error('Помилка отримання даних:', error);
-            });
-        */
+        // Код для приховування повідомлень про завантаження після завантаження iframe
+        document.querySelectorAll('iframe').forEach(frame => {
+            frame.onload = function() {
+                const loadingMessage = this.parentElement.querySelector('.loading');
+                if (loadingMessage) {
+                    loadingMessage.style.display = 'none';
+                }
+            };
+        });
     </script>
 </body>
 </html>
